@@ -39,9 +39,9 @@ struct ItemDetail: View {
     }
 }
 
-struct ItemDetail_Previews: PreviewProvider {
-    static let order = Order()
-    static var previews: some View {
-        ItemDetail(item: MenuItem.example).environmentObject(order)
-    }
-}
+//struct ItemDetail_Previews: PreviewProvider {
+//    static let order = Order()
+//    static var previews: some View {
+//        ItemDetail(item: MenuItem.example).environmentObject(order)
+//    }
+//}
