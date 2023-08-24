@@ -8,6 +8,16 @@
 
 import XCTest
 
+class AppPageModel {
+    enum TabBar {
+        static let orderTab = XCUIApplication().tabBars["Tab Bar"].buttons["Order"]
+    }
+    
+    static func tapOrder() {
+        TabBar.orderTab.tap()
+    }
+}
+
 class MenuPageModel {
     private let app = XCUIApplication()
     
@@ -34,5 +44,11 @@ class OrderPageModel {
     
     static func tapOrderThis() {
         Buttons.orderThis.tap()
+    }
+}
+
+class OrderModel {
+    enum Cells {
+        static let mapleFrenchToast = XCUIApplication().collectionViews.staticTexts["Maple French Toast"]
     }
 }

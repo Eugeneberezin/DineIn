@@ -26,23 +26,37 @@ class iDineUITests: XCTestCase {
     }
     
     func testMakeMapleFrenchToastOrder() {
-        let mapleFrenchToast = app.collectionViews.cells.buttons["Maple French Toast, $6, G, V"]
-        let title = app.navigationBars["Maple French Toast"].staticTexts["Maple French Toast"]
-        let orderTab = XCUIApplication().tabBars["Tab Bar"].buttons["Order"]
-        let expectedOrder = XCUIApplication().collectionViews.staticTexts["Maple French Toast"]
-        let orderThis = app.buttons["Order This"]
-        
+
         MenuPageModel.tapOnFrenchToast()
         
-        XCTAssertTrue(title.waitForExistence(timeout: 15))
+        XCTAssertTrue(OrderPageModel.NavBar.title.waitForExistence(timeout: 15))
         
         OrderPageModel.tapOrderThis()
         
-        orderTab.tap()
+        AppPageModel.tapOrder()
         
-        XCTAssertTrue(expectedOrder.waitForExistence(timeout: 15))
+        assertTheCorrectOrderTrue(element: OrderModel.Cells.mapleFrenchToast)
                 
     }
     
+    func testMakePancakesOrder() {
+        let pancakes = XCUIApplication().collectionViews.buttons["Stack-o-Pancakes, $8, D, G, V"]
+        let pancakesTitle = XCUIApplication().navigationBars["Stack-o-Pancakes"].staticTexts["Stack-o-Pancakes"]
+        let pancakesOrder = XCUIApplication().collectionViews.staticTexts["Stack-o-Pancakes"]
+        
+        
+        pancakes.tap()
+        XCTAssertTrue(pancakesTitle.waitForExistence(timeout: 15))
+        OrderPageModel.tapOrderThis()
+        AppPageModel.tapOrder()
+        assertTheCorrectOrderTrue(element: pancakesOrder)
+    }
+    
 
+}
+
+extension XCTestCase {
+    func assertTheCorrectOrderTrue(element: XCUIElement) {
+        XCTAssertTrue(element.waitForExistence(timeout: 15))
+    }
 }
